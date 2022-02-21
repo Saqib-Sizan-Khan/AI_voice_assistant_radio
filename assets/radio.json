@@ -111,6 +111,66 @@
       "category": "classic",
       "disliked": false,
       "order": 8
+    },
+
+    {
+      "id": 9,
+      "name": "89.2",
+      "tagline": "ABC Radio",
+      "color": "0xff090909",
+      "desc": "Your heartbeat changes to mimics the music you listen to.",
+      "url": "http://tun.in/seSzC",
+      "icon": "https://mytuner.global.ssl.fastly.net/media/tvos_radios/uvclzz6a6d7x.jpeg",
+      "image": "https://i.pinimg.com/originals/7f/f6/13/7ff613ed815f1eb56a90794ec64eecfe.jpg",
+      "lang": "Bangla",
+      "category": "classic",
+      "disliked": false,
+      "order": 9
+    },
+
+    {
+      "id": 10,
+      "name": "90.0",
+      "tagline": "Bangladesh Betar",
+      "color": "0xff090909",
+      "desc": "Your heartbeat changes to mimics the music you listen to.",
+      "url": "http://tun.in/semPU",
+      "icon": "https://mytuner.global.ssl.fastly.net/media/tvos_radios/uvclzz6a6d7x.jpeg",
+      "image": "https://i.pinimg.com/originals/7f/f6/13/7ff613ed815f1eb56a90794ec64eecfe.jpg",
+      "lang": "Bangla",
+      "category": "classic",
+      "disliked": false,
+      "order": 10
+    },
+
+    {
+      "id": 11,
+      "name": "90.4",
+      "tagline": "Dhaka FM",
+      "color": "0xff090909",
+      "desc": "Your heartbeat changes to mimics the music you listen to.",
+      "url": "http://tun.in/se3BS",
+      "icon": "https://mytuner.global.ssl.fastly.net/media/tvos_radios/uvclzz6a6d7x.jpeg",
+      "image": "https://i.pinimg.com/originals/7f/f6/13/7ff613ed815f1eb56a90794ec64eecfe.jpg",
+      "lang": "Bangla",
+      "category": "classic",
+      "disliked": false,
+      "order": 11
+    },
+
+    {
+      "id": 12,
+      "name": "88.0",
+      "tagline": "Radio Foorti",
+      "color": "0xff090909",
+      "desc": "Your heartbeat changes to mimics the music you listen to.",
+      "url": "http://tun.in/seOYt",
+      "icon": "https://mytuner.global.ssl.fastly.net/media/tvos_radios/uvclzz6a6d7x.jpeg",
+      "image": "https://i.pinimg.com/originals/7f/f6/13/7ff613ed815f1eb56a90794ec64eecfe.jpg",
+      "lang": "Bangla",
+      "category": "classic",
+      "disliked": false,
+      "order": 12
     }
   ]
 
