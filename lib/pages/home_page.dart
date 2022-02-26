@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:alan_voice/alan_voice.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    setupAlan();
     fetchRadios();
 
     _audioPlayer.onPlayerStateChanged.listen((event) {
@@ -34,6 +36,12 @@ class _HomePageState extends State<HomePage> {
       }
       setState(() {});
     });
+  }
+
+  setupAlan() {
+    AlanVoice.addButton(
+        "d913f6b32fd2c0585cd0ad65d5f03a112e956eca572e1d8b807a3e2338fdd0dc/stage",
+        buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
   }
 
   fetchRadios() async {
