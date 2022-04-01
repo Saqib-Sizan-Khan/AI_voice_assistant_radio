@@ -20,6 +20,18 @@ class _HomePageState extends State<HomePage> {
   Color _selectedColor = AIColor.primaryColor2;
   bool _isPlaying = false;
 
+  final sugg = [
+    "Play",
+    "Stop",
+    "Play Rock Music",
+    "Play 107 FM",
+    "Play Next",
+    "Play 104 FM",
+    "Pause",
+    "Play Previous",
+    "Play Pop Music",
+  ];
+
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
@@ -52,19 +64,28 @@ class _HomePageState extends State<HomePage> {
         playMusic(_selectedRadio.url);
         break;
 
+      case "play_channel":
+        final id = response["id"];
+        _audioPlayer.pause();
+        MyRadio newRadio = radios.firstWhere((element) => element.id == id);
+        radios.remove(newRadio);
+        radios.insert(0, newRadio);
+        playMusic(newRadio.url);
+        break;
+
       case "stop":
-       _audioPlayer.stop();
+        _audioPlayer.stop();
         break;
 
       case "next":
         final index = _selectedRadio.id;
         MyRadio newRadio;
-        if(index + 1 > radios.length){
-          newRadio = radios.firstWhere((element) => element.id==1 );
+        if (index + 1 > radios.length) {
+          newRadio = radios.firstWhere((element) => element.id == 1);
           radios.remove(newRadio);
           radios.insert(0, newRadio);
-        }else{
-          newRadio = radios.firstWhere((element) => element.id== index+1) ;
+        } else {
+          newRadio = radios.firstWhere((element) => element.id == index + 1);
           radios.remove(newRadio);
           radios.insert(0, newRadio);
         }
@@ -74,12 +95,12 @@ class _HomePageState extends State<HomePage> {
       case "prev":
         final index = _selectedRadio.id;
         MyRadio newRadio;
-        if(index - 1 <= 0){
-          newRadio = radios.firstWhere((element) => element.id==1 );
+        if (index - 1 <= 0) {
+          newRadio = radios.firstWhere((element) => element.id == 1);
           radios.remove(newRadio);
           radios.insert(0, newRadio);
-        }else{
-          newRadio = radios.firstWhere((element) => element.id== index - 1) ;
+        } else {
+          newRadio = radios.firstWhere((element) => element.id == index - 1);
           radios.remove(newRadio);
           radios.insert(0, newRadio);
         }
@@ -111,7 +132,31 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Container(
+          color: _selectedColor ?? AIColor.primaryColor2,
+          child: radios != null
+              ? [
+                  100.heightBox,
+                  "All Channels".text.xl.white.semiBold.make().px16(),
+                  20.heightBox,
+                  ListView(
+                    padding: Vx.m0,
+                    shrinkWrap: true,
+                    children: radios
+                        .map((e) => ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: NetworkImage(e.icon),
+                              ),
+                              title: "${e.name} FM".text.white.make(),
+                              subtitle: e.tagline.text.white.make(),
+                            ))
+                        .toList(),
+                  ).expand()
+                ].vStack(crossAlignment: CrossAxisAlignment.start)
+              : const Offstage(),
+        ),
+      ),
       body: Stack(
         children: [
           VxAnimatedBox()
@@ -122,19 +167,42 @@ class _HomePageState extends State<HomePage> {
                 end: Alignment.bottomRight,
               ))
               .make(),
-          AppBar(
-            title: "AI Bangla Radio".text.xl2.bold.white.make().shimmer(
-                  primaryColor: Vx.purple300,
-                  secondaryColor: Colors.white,
-                ),
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            centerTitle: true,
-          ).h(100).p16(),
+          [
+            AppBar(
+              title: "AI Bangla Radio".text.xl2.bold.white.make().shimmer(
+                    primaryColor: Vx.purple300,
+                    secondaryColor: Colors.white,
+                  ),
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+              centerTitle: true,
+            ).h(100.0).p16(),
+            "Start With - Hey Alan 👇".text.italic.semiBold.white.make(),
+            10.heightBox,
+            VxSwiper.builder(
+              itemCount: sugg.length,
+              height: 50.0,
+              viewportFraction: 0.35,
+              autoPlay: true,
+              itemBuilder: (context, index) {
+                final s = sugg[index];
+                return Chip(
+                  label: s.text.make(),
+                  backgroundColor: Vx.randomColor,
+                );
+              },
+            )
+          ].vStack(alignment: MainAxisAlignment.start),
+          30.heightBox,
           radios != null
               ? VxSwiper.builder(
                   itemCount: radios.length,
                   aspectRatio: 1.0,
+                  // aspectRatio: context.mdWindowSize == MobileWindwSize.small
+                  //     ? 1.0
+                  //     : context.mdWindowSize == MobileWindwSize.medium
+                  //         ? 2.0
+                  //         : 3.0,
                   enlargeCenterPage: true,
                   onPageChanged: (index) {
                     _selectedRadio = radios[index];
